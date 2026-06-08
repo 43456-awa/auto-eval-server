@@ -1,0 +1,22 @@
+{
+  "name": "auto-eval-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "教学评估自动提交 Web 服务 — 安全、快速、自动化",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "NODE_ENV=development node server.mjs",
+    "prod": "NODE_ENV=production node server.mjs"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
+    "iconv-lite": "^0.6.3",
+    "playwright": "^1.52.0",
+    "sharp": "^0.34.5",
+    "tesseract.js": "^7.0.0"
+  }
+}

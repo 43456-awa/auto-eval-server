@@ -1,0 +1,37 @@
+# systemd 服务 — 教学评估 Web 服务
+#
+# 安装：
+#   sudo cp deploy/auto-eval-web.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now auto-eval-web
+#
+# 查看日志：
+#   sudo journalctl -u auto-eval-web -f
+
+[Unit]
+Description=教学评估自动提交 Web 服务
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/auto-eval-web
+ExecStart=/usr/bin/node /opt/auto-eval-web/server.mjs
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=HOST=0.0.0.0
+
+# 安全限制
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/auto-eval-web/tmp
+
+[Install]
+WantedBy=multi-user.target
